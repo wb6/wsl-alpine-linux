@@ -7,12 +7,12 @@ one line to install latest Alpine Linux on wsl
 
 ## wsl version 2
 ```
-powershell -Command "$gg = ((Invoke-WebRequest """https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/latest-releases.yaml""").RawContent | findstr /C:""" file: alpine-miniroot""").Trim(""" """).Trim("""file: """) ; $uri1 = """https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/""" ; $uri = $uri1 + $gg; Invoke-WebRequest -outFile alpine.tar.gz -Uri $uri; wsl --import Alpine %UserProfile%\AlpineLinuxWsl alpine.tar.gz ; del alpine.tar.gz" && wsl -d Alpine
+powershell -Command "$_file = ((Invoke-WebRequest 'https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/latest-releases.yaml').RawContent | findstr /C:' file: alpine-miniroot').Trim(' ').Trim('file: ') ; $_uri = 'https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/' ; $uri = $_uri + $_file; Invoke-WebRequest -outFile alpine.tar.gz -Uri $uri; wsl --import Alpine %UserProfile%\AlpineLinuxWsl alpine.tar.gz ; del alpine.tar.gz" && wsl -d Alpine
 ```
 
 ## wsl version 1
 ```
-powershell -Command "$gg = ((Invoke-WebRequest """https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/latest-releases.yaml""").RawContent | findstr /C:""" file: alpine-miniroot""").Trim(""" """).Trim("""file: """) ; $uri1 = """https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/""" ; $uri = $uri1 + $gg; Invoke-WebRequest -outFile alpine.tar.gz -Uri $uri; wsl --import Alpine %UserProfile%\AlpineLinuxWsl alpine.tar.gz --version 1; del alpine.tar.gz" && wsl -d Alpine
+powershell -Command "$_file = ((Invoke-WebRequest 'https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/latest-releases.yaml').RawContent | findstr /C:' file: alpine-miniroot').Trim(' ').Trim('file: ') ; $_uri = 'https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/' ; $uri = $_uri + $_file; Invoke-WebRequest -outFile alpine.tar.gz -Uri $uri; wsl --import Alpine %UserProfile%\AlpineLinuxWsl alpine.tar.gz --version 1; del alpine.tar.gz" && wsl -d Alpine
 ```
 
 ## export file system and remove ( saves to users Downloads folder )
