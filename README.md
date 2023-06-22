@@ -25,7 +25,7 @@ wsl --export Alpine %UserProfile%\Downloads\alpine.tar && wsl --unregister Alpin
 wsl --unregister Alpine
 ```
 
-## how it works?
+## how does it works?
 
 download https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/latest-releases.yaml  
 extract filename of latest miniroot  
@@ -36,5 +36,54 @@ run ```del alpine.tar.gz```
 run ```wsl -d Alpine```  
 
 
-## links
+# extras
+
+## setup wsl2 bridged network
+
+### install Hyper-V virtual switch
+
+```
+powershell -Command "Get-NetAdapter"
+```
+
+```
+powershell -Command "New-VMSwitch -Name wsl-switch  -NetAdapterName <netadapter-name>"
+```
+
+### .wslconfig 
+edit ```.wslconfig``` file in ```%UserProfile%``` folder and add 
+
+```
+[wsl2]
+networkingMode = bridged
+vmSwitch = wsl-switch
+```
+
+## install openrc
+
+```
+apk add openrc
+touch /run/openrc/softlevel
+```
+
+
+## install sshd
+```
+apk add openssh
+ssh-keygen -A
+rc-update add sshd
+rc-service sshd restart
+```
+
+
+
+## install docker
+```
+apk add docker
+addgroup root docker
+rc-update add docker default
+rc-service docker restart
+```
+
+# links
 [Alpine linux](https://www.alpinelinux.org/)
